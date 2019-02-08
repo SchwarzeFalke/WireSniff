@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-01-25T14:50:31-06:00
+# @Last modified time: 2019-02-08T11:35:52-06:00
 import binascii
 
 # Main function
@@ -13,23 +13,38 @@ def menu():
     originAddress = formatString(hexString[0:12], 14)       # The origin address has a lenght of 6 bytes
     destinationAddress = formatString(hexString[12:24], 14) # also the destination address; so, 6x2 = 12
     type = hexString[24:28]                                 # The type information has a lenght of 2 bytes
-    ip = formatString(hexString[28:68], 42)                 # IP has a lenght of 20 bytes
-    tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
-    data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
 
     print "Direccion MAC de origen: ", originAddress
     print "Direccion MAC de destino: ", destinationAddress
-    print "IP: ", ip
-    print "TCP: ", tcp
-    print "Datos: ", data
     if type == '0800':
         print "Tipo: ", type, " (IPv4)"
+        ip = bin(int(hexString[28:68], 16))[4:]  # IP has a lenght of 20 bytes
+        print "IP: ", ip
+        
     if type == '0806':
+        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
+        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
+        print "IP: ", ip
         print "Tipo: ", type, " (ARP)"
+        print "TCP: ", tcp
+        print "Datos: ", data
     if type == '8035':
+        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
+        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (RARP)"
+        print "IP: ", ip
+        print "TCP: ", tcp
+        print "Datos: ", data
     if type == '08DD':
+        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
+        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (IPv6)"
+        print "IP: ", ip
+        print "TCP: ", tcp
+        print "Datos: ", data
 
 # This function gives a string a defined format of the type "00:00:00"
 # depending on the lenght [given by @top]. It returns a formatted string
