@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-08T11:39:22-06:00
+# @Last modified time: 2019-02-08T11:45:25-06:00
 import binascii
 
 # Main function
@@ -21,11 +21,11 @@ def menu():
         ip = bin(int(hexString[28:68], 16))[4:]  # IP has a lenght of 20 bytes
         print "IP: ", ip
         version = ip[0:4]
-        header = ip[4:4]
-        header = int(header)
-        print header
+        header = ip[4:8]
+        header = int(header, 2)
         if version == "0010":
             print "Version: IPv4"
+            print "Cabecera: ", (header * 32), " bytes"
         elif version == "0100":
             print "Version: IPv6"
 
