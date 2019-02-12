@@ -1,62 +1,148 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-08T11:45:25-06:00
+# @Last modified time: 2019-02-12T13:48:52-06:00
 import binascii
+import json
+
+
+def dictionary():
+    JSONfile = open('ip_protocol_numbers.json')
+    JSONstr = JSONfile.read()
+    JSONdata = json.loads(JSONstr)
+    return JSONdata
+
 
 # Main function
 def menu():
-    file = open(input('Ingrese el nombre del archivo a leer: '), "rb")
+    fileStr = "packages/"
+    readInput = raw_input('Ingrese el nombre del archivo a leer: ')
+    fileStr += readInput
+    file = open(fileStr, "rb")
     hexString = binascii.hexlify(file.read()).upper()       # All file's data is read an process as hex
     file.close()
 
-    originAddress = formatString(hexString[0:12], 14)       # The origin address has a lenght of 6 bytes
-    destinationAddress = formatString(hexString[12:24], 14) # also the destination address; so, 6x2 = 12
+    originAddress = formatHexString(hexString[0:12], 14)       # The origin address has a lenght of 6 bytes
+    destinationAddress = formatHexString(hexString[12:24], 14) # also the destination address; so, 6x2 = 12
     type = hexString[24:28]                                 # The type information has a lenght of 2 bytes
 
     print "Direccion MAC de origen: ", originAddress
     print "Direccion MAC de destino: ", destinationAddress
     if type == '0800':
         print "Tipo: ", type, " (IPv4)"
-        ip = bin(int(hexString[28:68], 16))[4:]  # IP has a lenght of 20 bytes
-        print "IP: ", ip
+        ip = "{0:8b}".format(int(hexString[28:68], 16))[2:]  # IP has a lenght of 20 bytes
+
         version = ip[0:4]
         header = ip[4:8]
         header = int(header, 2)
+        service = ip[8:16]
+        long = int(ip[16:32], 2)
+        id = int(ip[32:48], 2)
+        flags = ip[48:51]
+        posFrag = int(ip[51:64], 2)
+        ttl = int(ip[64:72], 2)
+        protocol = int(ip[72:80], 2)
+        controlHeader = int(ip[80:96], 2)
+        originIP = int(ip[96:128], 2)
+        destinyIP = int(ip[128:160], 2)
+
         if version == "0010":
             print "Version: IPv4"
             print "Cabecera: ", (header * 32), " bytes"
+            if service[0:3] == "000":
+                print "servicio: ", service[0:3], "de rutina"
+            elif service[0:3] == "001":
+                print "servicio: ", service[0:3], "Prioritario"
+            elif service[0:3] == "010":
+                print "servicio: ", service[0:3], "Inmediato"
+            elif service[0:3] == "011":
+                print "servicio: ", service[0:3], "Relampago"
+            elif service[0:3] == "100":
+                print "servicio: ", service[0:3], "Invalidacion Relampago"
+            elif service[0:3] == "101":
+                print "servicio: ", service[0:3], "Procesando Llamada critica y de emergencia"
+            elif service[0:3] == "110":
+                print "servicio: ", service[0:3], "Control de trabajo de internet"
+            elif service[0:3] == "111":
+                print "servicio: ", service[0:3], "Control de red"
+
+            if service[4] == "0":
+                print "Retardo: Normal (", service[4], ")"
+            elif service[4] == "1":
+                print "Retardo: Bajo (", service[4], ")"
+
+            if service[5] == "0":
+                print "Rendimiento: Normal (", service[5], ")"
+            elif service[5] == "1":
+                print "Rendimiento: Bajo (", service[5], ")"
+
+            if service[6] == "0":
+                print "Fiabilidad: Normal (", service[6], ")"
+            elif service[6] == "1":
+                print "Fiabilidad: Alta (", service[6], ")"
+
+            print "Longitud: ", long
+            print "Identificador: ", id
+
+            print "Bandera 1: Reservado (", flags[0], ")"
+            if flags[1] == "0":
+                print "Bandera 2: Divisible (", flags[1], ")"
+            elif flags[1] == "1":
+                print "Bandera 2: No divisible DF (", flags[1], ")"
+
+            if flags[2] == "0":
+                print "Bandera 3: Ultimo fragmentado (", flags[2], ")"
+            elif flags[2] == "1":
+                print "Bandera 3: Fragmento intermedio (", flags[2], ")"
+
+            print "Posicion del fragmento: ", posFrag
+            print "Tiempo de vida (TTL): ", ttl
+            print "Protocolo: ", (dictionary()[protocol])['Protocol'], " (", protocol, ")"
+            print "Suma de control de cabecera: ", controlHeader
+            print "Direccion IP de origen: ", formatNetString(str(originIP))
+            print "Direccion IP de origen: ", formatNetString(str(destinyIP))
         elif version == "0100":
             print "Version: IPv6"
 
     if type == '0806':
-        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
-        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
+        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "IP: ", ip
         print "Tipo: ", type, " (ARP)"
         print "TCP: ", tcp
         print "Datos: ", data
     if type == '8035':
-        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
-        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
+        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (RARP)"
         print "IP: ", ip
         print "TCP: ", tcp
         print "Datos: ", data
     if type == '08DD':
-        ip = formatString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatString(hexString[68:114], 48)               # TCP's lenght is 23
-        data = formatString(hexString[114:len(hexString)], (len(hexString)-112))
+        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
+        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (IPv6)"
         print "IP: ", ip
         print "TCP: ", tcp
         print "Datos: ", data
 
+
 # This function gives a string a defined format of the type "00:00:00"
 # depending on the lenght [given by @top]. It returns a formatted string
-def formatString(varString, top):
+
+
+def formatNetString(varString):
+    finalString = ''
+    for i in varString:
+        finalString += i
+        finalString += '.'
+    return finalString[:-1]
+
+
+def formatHexString(varString, top):
     finalString = ''
     a = 0
     b = 2
@@ -67,5 +153,6 @@ def formatString(varString, top):
         if(b != top):
             finalString += ':'
     return finalString
+
 
 menu()
