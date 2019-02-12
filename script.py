@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-12T13:48:52-06:00
+# @Last modified time: 2019-02-12T14:04:16-06:00
 import binascii
 import json
 
@@ -15,22 +15,26 @@ def dictionary():
 
 # Main function
 def menu():
-    fileStr = "packages/"
     readInput = raw_input('Ingrese el nombre del archivo a leer: ')
-    fileStr += readInput
+    fileStr = "packages/" + readInput
     file = open(fileStr, "rb")
-    hexString = binascii.hexlify(file.read()).upper()       # All file's data is read an process as hex
+    # All file's data is read an process as hex
+    hexString = binascii.hexlify(file.read()).upper()
     file.close()
 
-    originAddress = formatHexString(hexString[0:12], 14)       # The origin address has a lenght of 6 bytes
-    destinationAddress = formatHexString(hexString[12:24], 14) # also the destination address; so, 6x2 = 12
-    type = hexString[24:28]                                 # The type information has a lenght of 2 bytes
+    # The origin address has a lenght of 6 bytes
+    # also the destination address; so, 6x2 = 12
+    # The type information has a lenght of 2 bytes
+    originAddress = formatHexString(hexString[0:12], 14)
+    destinationAddress = formatHexString(hexString[12:24], 14)
+    type = hexString[24:28]
 
     print "Direccion MAC de origen: ", originAddress
     print "Direccion MAC de destino: ", destinationAddress
     if type == '0800':
         print "Tipo: ", type, " (IPv4)"
-        ip = "{0:8b}".format(int(hexString[28:68], 16))[2:]  # IP has a lenght of 20 bytes
+        # IP has a lenght of 20 bytes
+        ip = "{0:8b}".format(int(hexString[28:68], 16))[2:]
 
         version = ip[0:4]
         header = ip[4:8]
@@ -60,9 +64,11 @@ def menu():
             elif service[0:3] == "100":
                 print "servicio: ", service[0:3], "Invalidacion Relampago"
             elif service[0:3] == "101":
-                print "servicio: ", service[0:3], "Procesando Llamada critica y de emergencia"
+                print "servicio: ", service[0:3], "Procesando Llamada critica \
+                y de emergencia"
             elif service[0:3] == "110":
-                print "servicio: ", service[0:3], "Control de trabajo de internet"
+                print "servicio: ", service[0:3], "Control de trabajo de \
+                internet"
             elif service[0:3] == "111":
                 print "servicio: ", service[0:3], "Control de red"
 
@@ -97,7 +103,8 @@ def menu():
 
             print "Posicion del fragmento: ", posFrag
             print "Tiempo de vida (TTL): ", ttl
-            print "Protocolo: ", (dictionary()[protocol])['Protocol'], " (", protocol, ")"
+            print "Protocolo: ", (dictionary()[protocol])['Protocol'], " (", \
+                protocol, ")"
             print "Suma de control de cabecera: ", controlHeader
             print "Direccion IP de origen: ", formatNetString(str(originIP))
             print "Direccion IP de origen: ", formatNetString(str(destinyIP))
@@ -105,24 +112,30 @@ def menu():
             print "Version: IPv6"
 
     if type == '0806':
-        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        # IP has a lenght of 20 bytes
+        # TCP's lenght is 23
+        ip = formatHexString(hexString[28:68], 42)
+        tcp = formatHexString(hexString[68:114], 48)
         data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "IP: ", ip
         print "Tipo: ", type, " (ARP)"
         print "TCP: ", tcp
         print "Datos: ", data
     if type == '8035':
-        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        # IP has a lenght of 20 bytes
+        # TCP's lenght is 23
+        ip = formatHexString(hexString[28:68], 42)
+        tcp = formatHexString(hexString[68:114], 48)
         data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (RARP)"
         print "IP: ", ip
         print "TCP: ", tcp
         print "Datos: ", data
     if type == '08DD':
-        ip = formatHexString(hexString[28:68], 42)  # IP has a lenght of 20 bytes
-        tcp = formatHexString(hexString[68:114], 48)         # TCP's lenght is 23
+        # IP has a lenght of 20 bytes
+        # TCP's lenght is 23
+        ip = formatHexString(hexString[28:68], 42)
+        tcp = formatHexString(hexString[68:114], 48)
         data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
         print "Tipo: ", type, " (IPv6)"
         print "IP: ", ip
