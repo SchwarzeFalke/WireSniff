@@ -1,9 +1,32 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-12T14:04:16-06:00
+# @Last modified time: 2019-02-12T14:12:35-06:00
 import binascii
 import json
+
+
+# This function gives a string a defined format of the type "00:00:00"
+# depending on the lenght [given by @top]. It returns a formatted string
+def formatNetString(varString):
+    finalString = ''
+    for i in varString:
+        finalString += i
+        finalString += '.'
+    return finalString[:-1]
+
+
+def formatHexString(varString, top):
+    finalString = ''
+    a = 0
+    b = 2
+    while b != top:
+        finalString += varString[a:b]
+        a = b
+        b += 2
+        if(b != top):
+            finalString += ':'
+    return finalString
 
 
 def dictionary():
@@ -14,7 +37,8 @@ def dictionary():
 
 
 # Main function
-def menu():
+if __name__ == '__main__':
+
     readInput = raw_input('Ingrese el nombre del archivo a leer: ')
     fileStr = "packages/" + readInput
     file = open(fileStr, "rb")
@@ -116,7 +140,8 @@ def menu():
         # TCP's lenght is 23
         ip = formatHexString(hexString[28:68], 42)
         tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
+                                                               - 112))
         print "IP: ", ip
         print "Tipo: ", type, " (ARP)"
         print "TCP: ", tcp
@@ -126,7 +151,8 @@ def menu():
         # TCP's lenght is 23
         ip = formatHexString(hexString[28:68], 42)
         tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
+                                                               - 112))
         print "Tipo: ", type, " (RARP)"
         print "IP: ", ip
         print "TCP: ", tcp
@@ -136,36 +162,9 @@ def menu():
         # TCP's lenght is 23
         ip = formatHexString(hexString[28:68], 42)
         tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)-112))
+        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
+                                                               - 112))
         print "Tipo: ", type, " (IPv6)"
         print "IP: ", ip
         print "TCP: ", tcp
         print "Datos: ", data
-
-
-# This function gives a string a defined format of the type "00:00:00"
-# depending on the lenght [given by @top]. It returns a formatted string
-
-
-def formatNetString(varString):
-    finalString = ''
-    for i in varString:
-        finalString += i
-        finalString += '.'
-    return finalString[:-1]
-
-
-def formatHexString(varString, top):
-    finalString = ''
-    a = 0
-    b = 2
-    while b != top:
-        finalString += varString[a:b]
-        a = b
-        b += 2
-        if(b != top):
-            finalString += ':'
-    return finalString
-
-
-menu()
