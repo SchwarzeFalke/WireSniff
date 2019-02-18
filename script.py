@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-18T17:12:33-06:00
+# @Last modified time: 2019-02-18T17:56:58-06:00
 from bitstring import BitArray
 import codecs
 import binascii
