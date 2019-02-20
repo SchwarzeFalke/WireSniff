@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-18T17:56:58-06:00
+# @Last modified time: 2019-02-20T02:49:49-06:00
 from bitstring import BitArray
 import codecs
 import binascii
@@ -31,8 +31,8 @@ def formatHexString(varString, top):
     return finalString
 
 
-def dictionary():
-    JSONfile = open('ip_protocol_numbers.json')
+def dictionary(file):
+    JSONfile = open(file)
     JSONstr = JSONfile.read()
     JSONdata = json.loads(JSONstr)
     return JSONdata
@@ -135,8 +135,17 @@ if __name__ == '__main__':
             print("Tiempo de vida (TTL): ", ttl)
 
             print("Protocolo: {} [{}] ({})".format(
-                  (dictionary()[protocol])['Protocol'],
-                  (dictionary()[protocol])['Keyword'], protocol))
+                  (dictionary('ip_protocol_numbers.json')[protocol])['Protocol'],
+                  (dictionary('ip_protocol_numbers.json')[protocol])['Keyword'], protocol))
+
+            if protocol == 1:
+                icmpType = int(ip[160:168], 2)
+                icmpCode = int(ip[168:176], 2)
+                icmpChecksum = int(ip[176:192], 2)
+
+                print("Tipo: {}".format(dictionary('icmp_messages.json')[icmpType]['Message']))
+                print("Codigo: {}".format(dictionary('icmp_codes.json')[icmpCode]['Message']))
+                print("Checksum: {}".format(icmpChecksum))
 
             print("Suma de control de cabecera: ", controlHeader)
 

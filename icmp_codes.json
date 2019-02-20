@@ -1,0 +1,54 @@
+[
+  {
+    "Code": 0,
+    "Message": "No se puede llegar a la red"
+  },
+  {
+    "Code": 1,
+    "Message": "No se puede llegar al host o aplicación de destino"
+  },
+  {
+    "Code": 2,
+    "Message": "El destino no dispone del protocolo solicitado"
+  },
+  {
+    "Code": 3,
+    "Message": "No se puede llegar al puerto destino o la aplicación destino no está libre"
+  },
+  {
+    "Code": 4,
+    "Message": "Se necesita aplicar fragmentación, pero el flag correspondiente indica lo contrario"
+  },
+  {
+    "Code": 5,
+    "Message": "La ruta de origen no es correcta"
+  },
+  {
+    "Code": 6,
+    "Message": "No se conoce la red destino"
+  },
+  {
+    "Code": 7,
+    "Message": "No se conoce el host destino"
+  },
+  {
+    "Code": 8,
+    "Message": "El host origen está aislado"
+  },
+  {
+    "Code": 9,
+    "Message": "La comunicación con la red destino está prohibida por razones administrativas"
+  },
+  {
+    "Code": 10,
+    "Message": "La comunicación con el host destino está prohibida por razones administrativas"
+  },
+  {
+    "Code": 11,
+    "Message": "No se puede llegar a la red destino debido al Tipo de servicio"
+  },
+  {
+    "Code": 12,
+    "Message": "No se puede llegar al host destino debido al Tipo de servicio"
+  }
+]

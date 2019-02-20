@@ -1,0 +1,78 @@
+[
+  {
+    "Type": 0,
+    "Message": "Echo Reply (respuesta de eco)"
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": 3,
+    "Message": "Destination Unreacheable (destino inaccesible)"
+  },
+  {
+    "Type": 4,
+    "Message": "Source Quench (disminución del tráfico desde el origen)"
+  },
+  {
+    "Type": 5,
+    "Message": "Redirect (redireccionar - cambio de ruta)"
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": 8,
+    "Message": "Echo (solicitud de eco)"
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": null,
+    "Message": null
+  },
+  {
+    "Type": 11,
+    "Message": "Time Exceeded (tiempo excedido para un datagrama)"
+  },
+  {
+    "Type": 12,
+    "Message": "Parameter Problem (problema de parámetros)"
+  },
+  {
+    "Type": 13,
+    "Message": "Timestamp (solicitud de marca de tiempo)"
+  },
+  {
+    "Type": 14,
+    "Message": "Timestamp Reply (respuesta de marca de tiempo)"
+  },
+  {
+    "Type": 15,
+    "Message": "Information Request (solicitud de información) -obsoleto-"
+  },
+  {
+    "Type": 16,
+    "Message": "Information Reply (respuesta de información) -obsoleto-"
+  },
+  {
+    "Type": 17,
+    "Message": "Addressmask (solicitud de máscara de dirección)"
+  },
+  {
+    "Type": 18,
+    "Message": "Addressmask Reply (respuesta de máscara de dirección"
+  }
+]
