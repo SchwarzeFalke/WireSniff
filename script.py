@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-20T02:49:49-06:00
+# @Last modified time: 2019-02-20T11:50:24-06:00
 from bitstring import BitArray
 import codecs
 import binascii
@@ -73,13 +73,14 @@ if __name__ == '__main__':
         posFrag = int(ip[51:64], 2)
         ttl = int(ip[64:72], 2)
         protocol = int(ip[72:80], 2)
-        controlHeader = int(ip[80:96], 2)
-        originIP = int(ip[96:128], 2)
-        destinyIP = int(ip[128:160], 2)
+        controlHeader = hex(int(ip[80:96], 2)).upper()[2:]
+        originIP = str(int(ip[96:104], 2)) + "." + str(int(ip[104:112], 2)) + "."  + str(int(ip[112:120], 2)) + "."  + str(int(ip[120:128], 2))
+        destinyIP = str(int(ip[128:136], 2)) + "." + str(int(ip[136:144], 2)) + "." + str(int(ip[144:152], 2)) + "." + str(int(ip[152:160], 2))
 
+        print(originIP)
+        print(destinyIP)
         if version == "0100":
             print("Version: IPv4")
-
             print("Cabecera: ", (header * 32), " bytes")
 
             if service[0:3] == "000":
@@ -141,16 +142,18 @@ if __name__ == '__main__':
             if protocol == 1:
                 icmpType = int(ip[160:168], 2)
                 icmpCode = int(ip[168:176], 2)
-                icmpChecksum = int(ip[176:192], 2)
+                icmpChecksum = hex(int(ip[176:192], 2)).upper()[2:]
 
-                print("Tipo: {}".format(dictionary('icmp_messages.json')[icmpType]['Message']))
-                print("Codigo: {}".format(dictionary('icmp_codes.json')[icmpCode]['Message']))
-                print("Checksum: {}".format(icmpChecksum))
+                print("\tTipo: {}".format(dictionary('icmp_messages.json')
+                                        [icmpType]['Message']))
+                print("\tCodigo: {}".format(dictionary('icmp_codes.json')
+                                          [icmpCode]['Message']))
+                print("\tChecksum: {}".format(icmpChecksum))
 
             print("Suma de control de cabecera: ", controlHeader)
 
-            print("Direccion IP de origen: ", formatNetString(str(originIP)))
-            print("Direccion IP de origen: ", formatNetString(str(destinyIP)))
+            print("Direccion IP de origen: {}".format(originIP))
+            print("Direccion IP de origen: {}".format(destinyIP))
 
         elif version == "0100":
             print("Version: IPv6")
