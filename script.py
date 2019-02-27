@@ -1,7 +1,7 @@
 # @Author: schwarze_falke
 # @Date:   2019-01-25T13:30:28-06:00
 # @Last modified by:   schwarze_falke
-# @Last modified time: 2019-02-20T11:50:24-06:00
+# @Last modified time: 2019-02-27T01:36:24-06:00
 from bitstring import BitArray
 import codecs
 import binascii
@@ -12,9 +12,12 @@ import json
 # depending on the lenght [given by @top]. It returns a formatted string
 def formatNetString(varString):
     finalString = ''
-    for i in varString:
-        finalString += i
-        finalString += '.'
+    i = 0
+    while(i < len(varString)):
+        if(i+2 > len(varString)):
+            break
+        finalString += str(int(varString[i:i+2], 16)) + '.'
+        i += 2
     return finalString[:-1]
 
 
@@ -161,14 +164,48 @@ if __name__ == '__main__':
     if type == '0806':
         # IP has a lenght of 20 bytes
         # TCP's lenght is 23
-        ip = formatHexString(hexString[28:68], 42)
-        tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
-                                                               - 112))
-        print("IP: ", ip)
-        print("Tipo: ", type, " (ARP)")
-        print("TCP: ", tcp)
-        print("Datos: ", data)
+        hardware = int(hexString[28:32], 16)
+        protocol = hexString[32:36]
+        x = hardware_address = int(hexString[36:38], 16)
+        y = protocol_address = int(hexString[38:40], 16)
+        opcode = int(hexString[40:44], 16)
+
+        trans_mac_address = hexString[44:(44+(x*2))]
+        trans_ip_address = hexString[(44+(x*2)):(44+(x*2)+(y*2))]
+
+        receiv_mac_address = hexString[(44+(x*2)+(y*2)):(44+(2*(x*2))+(y*2))]
+        receiv_ip_address = hexString[(44+(2*(x*2))+(y*2)):(44+(2*(x*2))+(2*(y*2)))]
+        print("Tipo: {} (ARP)".format(type))
+        print("Tipo de Hardware: {} ({})".format(
+            dictionary('hardware_type_arp.json')[hardware]['Type'],
+            hardware
+        ))
+        if(protocol == '0800'):
+            print("Protocolo: IPv4 ({})".format(protocol))
+        elif(protocol == '0806'):
+            print("Protocolo: ARP ({})".format(protocol))
+        elif(protocol == '0835'):
+            print("Protocolo: RARP ({})".format(protocol))
+        elif(protocol == '086DD'):
+            print("Protocolo: IPv6 ({})".format(protocol))
+        print("Longitud de la direccion hardware: {} bytes".format(hardware_address))
+        print("Longitud de la dirección protocolo: {} bytes".format(protocol_address))
+        if(opcode == 1):
+            print("Solicitud ARP")
+        elif(opcode == 2):
+            print("Respuesta ARP")
+        elif(opcode == 3):
+            print("Solicitud RARP")
+        elif(opcode == 4):
+            print("Respuesta RARP")
+
+        print("Dirección hardware del emisor (MAC): {}".format(formatHexString(trans_mac_address,
+                                                                        len(trans_mac_address) + 2)))
+        print("Dirección IP del emisor: {}".format(formatNetString(trans_ip_address)))
+
+        print("Dirección hardware del receptor (MAC): {}".format(formatHexString(receiv_mac_address,
+                                                                       len(receiv_mac_address) + 2)))
+        print("Dirección IP del receptor: {}".format(formatNetString(receiv_ip_address)))
     if type == '8035':
         # IP has a lenght of 20 bytes
         # TCP's lenght is 23

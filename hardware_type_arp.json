@@ -1,0 +1,158 @@
+[
+  {
+    "Code": 0,
+    "Type": "Reserved"
+  },
+  {
+    "Code": 1,
+    "Type": "Ethernet (10Mb)"
+  },
+  {
+    "Code": 2,
+    "Type": "Experimental Ethernet (3Mb)"
+  },
+  {
+    "Code": 3,
+    "Type": "Amateur Radio AX.25"
+  },
+  {
+    "Code": 4,
+    "Type": "Proteon ProNET Token Ring"
+  },
+  {
+    "Code": 5,
+    "Type": "Chaos"
+  },
+  {
+    "Code": 6,
+    "Type": "IEEE 802 Networks"
+  },
+  {
+    "Code": 7,
+    "Type": "ARCNET"
+  },
+  {
+    "Code": 8,
+    "Type": "Hyperchannel"
+  },
+  {
+    "Code": 9,
+    "Type": "Lanstar"
+  },
+  {
+    "Code": 10,
+    "Type": "Autonet Short Address"
+  },
+  {
+    "Code": 11,
+    "Type": "LocalTalk"
+  },
+  {
+    "Code": 12,
+    "Type": "LocalNet (IBM PCNet or SYTEK LocalNET)"
+  },
+  {
+    "Code": 13,
+    "Type": "Ultra link"
+  },
+  {
+    "Code": 14,
+    "Type": "SMDS"
+  },
+  {
+    "Code": 15,
+    "Type": "Frame Relay"
+  },
+  {
+    "Code": 16,
+    "Type": "Asynchronous Transmission Mode (ATM)"
+  },
+  {
+    "Code": 17,
+    "Type": "HDLC"
+  },
+  {
+    "Code": 18,
+    "Type": "Fibre Channel"
+  },
+  {
+    "Code": 19,
+    "Type": "Asynchronous Transmission Mode (ATM)"
+  },
+  {
+    "Code": 20,
+    "Type": "Serial Line"
+  },
+  {
+    "Code": 21,
+    "Type": "Asynchronous Transmission Mode (ATM)"
+  },
+  {
+    "Code": 22,
+    "Type": "MIL-STD-188-220"
+  },
+  {
+    "Code": 23,
+    "Type": "Metricom"
+  },
+  {
+    "Code": 24,
+    "Type": "IEEE 1394.1995"
+  },
+  {
+    "Code": 25,
+    "Type": "MAPOS"
+  },
+  {
+    "Code": 26,
+    "Type": "Twinaxial"
+  },
+  {
+    "Code": 27,
+    "Type": "EUI-64"
+  },
+  {
+    "Code": 28,
+    "Type": "HIPARP"
+  },
+  {
+    "Code": 29,
+    "Type": "IP and ARP over ISO 7816-3"
+  },
+  {
+    "Code": 30,
+    "Type": "ARPSec"
+  },
+  {
+    "Code": 31,
+    "Type": "IPsec tunnel"
+  },
+  {
+    "Code": 32,
+    "Type": "InfiniBand (TM)"
+  },
+  {
+    "Code": 33,
+    "Type": "TIA-102 Project 25 Common Air Interface (CAI)"
+  },
+  {
+    "Code": 34,
+    "Type": "Wiegand Interface"
+  },
+  {
+    "Code": 35,
+    "Type": "Pure IP"
+  },
+  {
+    "Code": 36,
+    "Type": "HW_EXP1"
+  },
+  {
+    "Code": 37,
+    "Type": "Ethernet (10Mb)"
+  },
+  {
+    "Code": 38,
+    "Type": "Unassigned"
+  }
+]
