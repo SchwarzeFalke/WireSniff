@@ -1,0 +1,63 @@
+[
+    {
+        "Type": 0,
+        "Message": "No se puede llegar a la red"
+    },
+    {
+        "Type": 1,
+        "Message": "No se puede llegar al host o aplicación de destino",
+        "Code": [{
+                "Value": 0,
+                "Description": "No existe ruta destino"
+            },
+            {
+                "Value": 1,
+                "Description": "Comunicacion con el desino administrativamente prohibida"
+            },
+            {
+                "Value": 2,
+                "Description": "No asignado"
+            },
+            {
+                "Value": 3,
+                "Description": "Direccion inalcanzable"
+            }
+        ]
+    },
+    {
+        "Type": 2,
+        "Message": "Mensaje del paquete demasiado grande"
+    },
+    {
+        "Type": 3,
+        "Message": "Time exceeded message",
+        "Code": [
+            {
+                "Value": 0,
+                "Description": "El limite del salto excedido"
+            },
+            {
+                "Value": 1,
+                "Description": "Tiempo de reensamble de fragmento excedido"
+            }
+        ]
+    },
+    {
+        "Type": 4,
+        "Message": "Mensaje de problema de parametro",
+        "Code": [
+            {
+                "Value": 0,
+                "Description": "Campo de encabezado erroneo"
+            },
+            {
+                "Value": 1,
+                "Description": "Tipo del encabezado siguiente desconocido"
+            },
+            {
+                "Value": 2,
+                "Description": "Opcion desconocida del IPv6"
+            }
+        ]
+    }
+]

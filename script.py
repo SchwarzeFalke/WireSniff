@@ -233,6 +233,9 @@ if __name__ == '__main__':
         jumpLimit = int((hexString[42:44]), 16)
         originAddress = hexString[44:76]
         destinationAddress = hexString[76:108]
+        icmpType = int((hexString[108:110]), 16)
+        icmpCode = int((hexString[110:112]), 16)
+        icmpChecksum = hexString[112:116]
 
         print("Tipo: {} (IPv6)".format(type))
         print("Version: {}".format(version))
@@ -278,10 +281,17 @@ if __name__ == '__main__':
             (dictionary('ip_protocol_numbers.json')
              [nextHeader])['Protocol'],
             (dictionary('ip_protocol_numbers.json')[nextHeader])['Keyword'], nextHeader))
-        
+
         print("Limite de salto: {}".format(jumpLimit))
-        
+
         print("Direccion origen: {}".format(
             formatHexString(originAddress, 4, 36)))
         print("Direccion destino: {}".format(
             formatHexString(destinationAddress, 4, 36)))
+
+        if (nextHeader == 58):
+            print("\tICMP Tipo: {}\n\tICMP Codigo: {}".format(dictionary('icmpv6_codes.json')
+                                                        [icmpType]['Message'], dictionary(
+                                                            'icmpv6_codes.json')
+                                                        [icmpType]['Code'][icmpCode]['Description']))
+            print("\tICMP Checksum: {}".format(icmpChecksum))
