@@ -9,7 +9,7 @@ import json
 
 
 # This function gives a string a defined format of the type "00:00:00"
-# depending on the lenght [given by @top]. It returns a formatted string
+# depending on the length [given by @top]. It returns a formatted string
 def formatNetString(varString):
     finalString = ''
     i = 0
@@ -21,14 +21,14 @@ def formatNetString(varString):
     return finalString[:-1]
 
 
-def formatHexString(varString, top):
+def formatHexString(varString, type, top):
     finalString = ''
     a = 0
-    b = 2
+    b = type
     while b != top:
         finalString += str(varString[a:b])
         a = b
-        b += 2
+        b += type
         if(b != top):
             finalString += ':'
     return finalString
@@ -56,8 +56,8 @@ if __name__ == '__main__':
     # The origin address has a lenght of 6 bytes
     # also the destination address; so, 6x2 = 12
     # The type information has a lenght of 2 bytes
-    originAddress = formatHexString(hexString[0:12], 14)
-    destinationAddress = formatHexString(hexString[12:24], 14)
+    originAddress = formatHexString(hexString[0:12], 2, 14)
+    destinationAddress = formatHexString(hexString[12:24], 2, 14)
     type = hexString[24:28]
     print("Direccion MAC de origen: ", originAddress)
     print("Direccion MAC de destino: ", destinationAddress)
@@ -77,8 +77,10 @@ if __name__ == '__main__':
         ttl = int(ip[64:72], 2)
         protocol = int(ip[72:80], 2)
         controlHeader = hex(int(ip[80:96], 2)).upper()[2:]
-        originIP = str(int(ip[96:104], 2)) + "." + str(int(ip[104:112], 2)) + "."  + str(int(ip[112:120], 2)) + "."  + str(int(ip[120:128], 2))
-        destinyIP = str(int(ip[128:136], 2)) + "." + str(int(ip[136:144], 2)) + "." + str(int(ip[144:152], 2)) + "." + str(int(ip[152:160], 2))
+        originIP = str(int(ip[96:104], 2)) + "." + str(int(ip[104:112], 2)) + \
+            "." + str(int(ip[112:120], 2)) + "." + str(int(ip[120:128], 2))
+        destinyIP = str(int(ip[128:136], 2)) + "." + str(int(ip[136:144], 2)) + \
+            "." + str(int(ip[144:152], 2)) + "." + str(int(ip[152:160], 2))
 
         print(originIP)
         print(destinyIP)
@@ -139,7 +141,8 @@ if __name__ == '__main__':
             print("Tiempo de vida (TTL): ", ttl)
 
             print("Protocolo: {} [{}] ({})".format(
-                  (dictionary('ip_protocol_numbers.json')[protocol])['Protocol'],
+                  (dictionary('ip_protocol_numbers.json')
+                   [protocol])['Protocol'],
                   (dictionary('ip_protocol_numbers.json')[protocol])['Keyword'], protocol))
 
             if protocol == 1:
@@ -148,9 +151,9 @@ if __name__ == '__main__':
                 icmpChecksum = hex(int(ip[176:192], 2)).upper()[2:]
 
                 print("\tTipo: {}".format(dictionary('icmp_messages.json')
-                                        [icmpType]['Message']))
+                                          [icmpType]['Message']))
                 print("\tCodigo: {}".format(dictionary('icmp_codes.json')
-                                          [icmpCode]['Message']))
+                                            [icmpCode]['Message']))
                 print("\tChecksum: {}".format(icmpChecksum))
 
             print("Suma de control de cabecera: ", controlHeader)
@@ -174,7 +177,8 @@ if __name__ == '__main__':
         trans_ip_address = hexString[(44+(x*2)):(44+(x*2)+(y*2))]
 
         receiv_mac_address = hexString[(44+(x*2)+(y*2)):(44+(2*(x*2))+(y*2))]
-        receiv_ip_address = hexString[(44+(2*(x*2))+(y*2)):(44+(2*(x*2))+(2*(y*2)))]
+        receiv_ip_address = hexString[(
+            44+(2*(x*2))+(y*2)):(44+(2*(x*2))+(2*(y*2)))]
         print("Tipo: {} (ARP)".format(type))
         print("Tipo de Hardware: {} ({})".format(
             dictionary('hardware_type_arp.json')[hardware]['Type'],
@@ -199,32 +203,85 @@ if __name__ == '__main__':
         elif(opcode == 4):
             print("Respuesta RARP")
 
-        print("Dirección hardware del emisor (MAC): {}".format(formatHexString(trans_mac_address,
-                                                                        len(trans_mac_address) + 2)))
-        print("Dirección IP del emisor: {}".format(formatNetString(trans_ip_address)))
+        print("Dirección hardware del emisor (MAC): {}".format(formatHexString(trans_mac_address, 2,
+                                                                               len(trans_mac_address) + 2)))
+        print("Dirección IP del emisor: {}".format(
+            formatNetString(trans_ip_address)))
 
-        print("Dirección hardware del receptor (MAC): {}".format(formatHexString(receiv_mac_address,
-                                                                       len(receiv_mac_address) + 2)))
-        print("Dirección IP del receptor: {}".format(formatNetString(receiv_ip_address)))
+        print("Dirección hardware del receptor (MAC): {}".format(formatHexString(receiv_mac_address, 2,
+                                                                                 len(receiv_mac_address) + 2)))
+        print("Dirección IP del receptor: {}".format(
+            formatNetString(receiv_ip_address)))
     if type == '8035':
         # IP has a lenght of 20 bytes
         # TCP's lenght is 23
-        ip = formatHexString(hexString[28:68], 42)
-        tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
-                                                               - 112))
+        ip = formatHexString(hexString[28:68], 2, 42)
+        tcp = formatHexString(hexString[68:114], 2, 48)
+        data = formatHexString(hexString[114:len(hexString)], 2, (len(hexString)
+                                                                  - 112))
         print("Tipo: ", type, " (RARP)")
         print("IP: ", ip)
         print("TCP: ", tcp)
         print("Datos: ", data)
-    if type == '08DD':
-        # IP has a lenght of 20 bytes
-        # TCP's lenght is 23
-        ip = formatHexString(hexString[28:68], 42)
-        tcp = formatHexString(hexString[68:114], 48)
-        data = formatHexString(hexString[114:len(hexString)], (len(hexString)
-                                                               - 112))
-        print("Tipo: ", type, " (IPv6)")
-        print("IP: ", ip)
-        print("TCP: ", tcp)
-        print("Datos: ", data)
+    if type == '86DD':
+
+        version = int((hexString[28:29]), 16)
+        traffic = BitArray(hex=hexString[29:31]).bin
+        flowLabel = int((hexString[31:36]), 16)
+        dataSize = int((hexString[36:40]), 16)
+        nextHeader = int((hexString[40:42]), 16)
+        jumpLimit = int((hexString[42:44]), 16)
+        originAddress = hexString[44:76]
+        destinationAddress = hexString[76:108]
+
+        print("Tipo: {} (IPv6)".format(type))
+        print("Version: {}".format(version))
+
+        if traffic[0:3] == "000":
+            print("Trafico: ", traffic[0:3], "de rutina")
+        elif traffic[0:3] == "001":
+            print("Trafico: ", traffic[0:3], "Prioritario")
+        elif traffic[0:3] == "010":
+            print("Trafico: ", traffic[0:3], "Inmediato")
+        elif traffic[0:3] == "011":
+            print("Trafico: ", traffic[0:3], "Relampago")
+        elif traffic[0:3] == "100":
+            print("Trafico: ", traffic[0:3], "Invalidacion Relampago")
+        elif traffic[0:3] == "101":
+            print("Trafico: ", traffic[0:3], "Procesando Llamada critica \
+            y de emergencia")
+        elif traffic[0:3] == "110":
+            print("Trafico: ", traffic[0:3], "Control de trabajo de \
+            internet")
+        elif traffic[0:3] == "111":
+            print("Trafico: ", traffic[0:3], "Control de red")
+
+        if traffic[4] == "0":
+            print("Retardo: Normal (", traffic[4], ")")
+        elif traffic[4] == "1":
+            print("Retardo: Bajo (", traffic[4], ")")
+
+        if traffic[5] == "0":
+            print("Rendimiento: Normal (", traffic[5], ")")
+        elif traffic[5] == "1":
+            print("Rendimiento: Bajo (", traffic[5], ")")
+
+        if traffic[6] == "0":
+            print("Fiabilidad: Normal (", traffic[6], ")")
+        elif traffic[6] == "1":
+            print("Fiabilidad: Alta (", traffic[6], ")")
+
+        print("Etiqueta de flujo: {}".format(flowLabel))
+        print("Tamano de datos: {}".format(dataSize))
+
+        print("Encabezado siguiente: {} [{}] ({})".format(
+            (dictionary('ip_protocol_numbers.json')
+             [nextHeader])['Protocol'],
+            (dictionary('ip_protocol_numbers.json')[nextHeader])['Keyword'], nextHeader))
+        
+        print("Limite de salto: {}".format(jumpLimit))
+        
+        print("Direccion origen: {}".format(
+            formatHexString(originAddress, 4, 36)))
+        print("Direccion destino: {}".format(
+            formatHexString(destinationAddress, 4, 36)))
