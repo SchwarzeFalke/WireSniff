@@ -1,5 +1,4 @@
-[
-    {
+[{
         "Type": 0,
         "Message": "No se puede llegar a la red"
     },
@@ -31,8 +30,7 @@
     {
         "Type": 3,
         "Message": "Time exceeded message",
-        "Code": [
-            {
+        "Code": [{
                 "Value": 0,
                 "Description": "El limite del salto excedido"
             },
@@ -45,8 +43,7 @@
     {
         "Type": 4,
         "Message": "Mensaje de problema de parametro",
-        "Code": [
-            {
+        "Code": [{
                 "Value": 0,
                 "Description": "Campo de encabezado erroneo"
             },

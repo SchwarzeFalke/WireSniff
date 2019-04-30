@@ -1,5 +1,4 @@
-[
-  {
+[{
     "Decimal": 0,
     "Keyword": "HOPOPT",
     "Protocol": "IPv6 Hop-by-Hop Option",

@@ -1,0 +1,871 @@
+[{
+        "port": "n/d / GRE",
+        "name": "gre",
+        "descript": "GRE (protocolo IP 47) Enrutamiento y acceso remoto"
+    },
+    {
+        "port": "n/d / ESP",
+        "name": "",
+        "descript": "IPSec ESP (protocolo IP 50) Enrutamiento y acceso remoto"
+    },
+    {
+        "port": "n/d / AH",
+        "name": "",
+        "descript": "IPSec AH (protocolo IP 51) Enrutamiento y acceso remoto"
+    },
+    {
+        "port": "1",
+        "name": "tcpmux",
+        "descript": "Multiplexor TCP"
+    },
+    {
+        "port": "5",
+        "name": "rje",
+        "descript": "Entrada de trabajo remota"
+    },
+    {
+        "port": "7",
+        "name": "echo",
+        "descript": "Protocolo Echo (Eco) Responde con eco a llamadas remotas"
+    },
+    {
+        "port": "9",
+        "name": "discard",
+        "descript": "Protocolo Discard, elimina cualquier dato que recibe, sirve para la evaluación de conexiones"
+    },
+    {
+        "port": "11",
+        "name": "systat",
+        "descript": "Servicio del sistema para listar los ports conectados"
+    },
+    {
+        "port": "13",
+        "name": "daytime",
+        "descript": "Protocolo Daytime, envía la fecha y hora actuales"
+    },
+    {
+        "port": "17",
+        "name": "qotd",
+        "descript": "Quote of the Day, envía la cita del día"
+    },
+    {
+        "port": "18",
+        "name": "msp",
+        "descript": "Protocolo de envío de mensajes"
+    },
+    {
+        "port": "19",
+        "name": "chargen",
+        "descript": "Protocolo Chargen o Generador de caracteres, envía flujos infinitos de caracteres"
+    },
+    {
+        "port": "20",
+        "name": "ftp-data",
+        "descript": "FTP File Transfer Protocol (Protocolo de Transferencia de Ficheros) - datos"
+    },
+    {
+        "port": "21",
+        "name": "ftp",
+        "descript": "FTP File Transfer Protocol (Protocolo de Transferencia de Ficheros) - control"
+    },
+    {
+        "port": "22",
+        "name": "ssh",
+        "descript": "SSH, scp, SFTP"
+    },
+    {
+        "port": "23",
+        "name": "telnet",
+        "descript": "Telnet manejo remoto de equipo, inseguro"
+    },
+    {
+        "port": "25",
+        "name": "smtp",
+        "descript": "SMTP Simple Mail Transfer Protocol (Protocolo Simple de Transferencia de Correo)"
+    },
+    {
+        "port": "37",
+        "name": "time",
+        "descript": "Time Protocol. Sincroniza hora y fecha"
+    },
+    {
+        "port": "39",
+        "name": "rlp",
+        "descript": "Protocolo de ubicación de recursos"
+    },
+    {
+        "port": "42",
+        "name": "nameserver",
+        "descript": "Servicio de names de Internet"
+    },
+    {
+        "port": "43",
+        "name": "nickname",
+        "descript": "Servicio de directorio WHOIS"
+    },
+    {
+        "port": "49",
+        "name": "tacacs",
+        "descript": "Terminal Access Controller Access Control System\npara el acceso y autenticación basado en TCP/IP"
+    },
+    {
+        "port": "50",
+        "name": "re-mail-ck",
+        "descript": "Protocolo de verificación de correo remoto"
+    },
+    {
+        "port": "53 and udp",
+        "name": "domain",
+        "descript": "DNS Domain Name System (Sistema de names de Dominio), por ejemplo BIND"
+    },
+    {
+        "port": "53",
+        "name": "",
+        "descript": "FaceTime"
+    },
+    {
+        "port": "63",
+        "name": "whois++",
+        "descript": "Servicios extendidos de WHOIS (WHOIS++)"
+    },
+    {
+        "port": "66 and udp",
+        "name": "Oracle SQLNet",
+        "descript": "Software de red que permite acceso remoto\nentre los programas y la base de datos Oracle."
+    },
+    {
+        "port": "67",
+        "name": "bootps",
+        "descript": "BOOTP BootStrap Protocol (servidor), también usado por DHCP"
+    },
+    {
+        "port": "68",
+        "name": "bootpc",
+        "descript": "BOOTP BootStrap Protocol (cliente), también usado por DHCP"
+    },
+    {
+        "port": "69",
+        "name": "tftp",
+        "descript": "TFTP Trivial File Transfer Protocol (Protocolo Trivial de Transferencia de Ficheros)"
+    },
+    {
+        "port": "70",
+        "name": "gopher",
+        "descript": "Gopher"
+    },
+    {
+        "port": "79",
+        "name": "finger",
+        "descript": "Finger"
+    },
+    {
+        "port": "80",
+        "name": "http",
+        "descript": "HTTP HyperText Transfer Protocol (Protocolo de Transferencia de HiperTexto) (WWW)"
+    },
+    {
+        "port": "88",
+        "name": "kerberos",
+        "descript": "Kerberos Agente de autenticación"
+    },
+    {
+        "port": "95",
+        "name": "supdup",
+        "descript": "Extensión del protocolo Telnet"
+    },
+    {
+        "port": "101",
+        "name": "hostname",
+        "descript": "Servicios de names de host en máquinas SRI-NIC"
+    },
+    {
+        "port": "107",
+        "name": "rtelnet",
+        "descript": "Telnet remoto"
+    },
+    {
+        "port": "109",
+        "name": "pop2",
+        "descript": "POP2 Post Office Protocol (E-mail)"
+    },
+    {
+        "port": "110",
+        "name": "pop3",
+        "descript": "POP3 Post Office Protocol (E-mail)"
+    },
+    {
+        "port": "111",
+        "name": "sunrpc",
+        "descript": "sunrpc"
+    },
+    {
+        "port": "113",
+        "name": "auth",
+        "descript": "ident (auth) antiguo sistema de identificación"
+    },
+    {
+        "port": "115",
+        "name": "sftp",
+        "descript": "SFTP Protocolo de transferencia de archivos seguros"
+    },
+    {
+        "port": "117",
+        "name": "uupc-path",
+        "descript": "Servicios de rutas de Unix-to-Unix Copy Protocol (UUCP)"
+    },
+    {
+        "port": "119",
+        "name": "nntp",
+        "descript": "NNTP usado en los grupos de noticias de usenet"
+    },
+    {
+        "port": "123",
+        "name": "ntp",
+        "descript": "NTP Protocolo de sincronización de tiempo"
+    },
+    {
+        "port": "135",
+        "name": "epmap",
+        "descript": "epmap"
+    },
+    {
+        "port": "137",
+        "name": "netbios-ns",
+        "descript": "NetBIOS Servicio de names"
+    },
+    {
+        "port": "138",
+        "name": "netbios-dgm",
+        "descript": "NetBIOS Servicio de envío de datagramas"
+    },
+    {
+        "port": "139",
+        "name": "netbios-ssn",
+        "descript": "NetBIOS Servicio de sesiones"
+    },
+    {
+        "port": "143",
+        "name": "imap",
+        "descript": "IMAP4 Internet Message Access Protocol (E-mail)"
+    },
+    {
+        "port": "161",
+        "name": "snmp",
+        "descript": "SNMP Simple Network Management Protocol"
+    },
+    {
+        "port": "162",
+        "name": "snmptrap",
+        "descript": "SNMP-trap"
+    },
+    {
+        "port": "174",
+        "name": "mailq",
+        "descript": "Cola de transporte de correos electrónicon MAILQ"
+    },
+    {
+        "port": "177",
+        "name": "xdmcp",
+        "descript": "XDMCP Protocolo de gestión de displays en X11"
+    },
+    {
+        "port": "178",
+        "name": "nextstep",
+        "descript": "Servidor de ventanas NeXTStep"
+    },
+    {
+        "port": "179",
+        "name": "bgp",
+        "descript": "Border Gateway Protocol"
+    },
+    {
+        "port": "194",
+        "name": "irc",
+        "descript": "Internet Relay Chat"
+    },
+    {
+        "port": "199",
+        "name": "smux",
+        "descript": "SNMP UNIX Multiplexer"
+    },
+    {
+        "port": "201",
+        "name": "at-rtmp",
+        "descript": "Enrutamiento AppleTalk"
+    },
+    {
+        "port": "202",
+        "name": "at-nbp",
+        "descript": "Enlace de nembres AppleTalk"
+    },
+    {
+        "port": "204",
+        "name": "at-echo",
+        "descript": "Echo AppleTalk"
+    },
+    {
+        "port": "206",
+        "name": "at-zis",
+        "descript": "Zona de información AppleTalk"
+    },
+    {
+        "port": "209",
+        "name": "qmtp",
+        "descript": "Protocolo de transferencia rápida de correo (QMTP)"
+    },
+    {
+        "port": "210",
+        "name": "z39.50",
+        "descript": "Base de datos NISO Z39.50"
+    },
+    {
+        "port": "213",
+        "name": "ipx",
+        "descript": "El protocolo de intercambio de paquetes entre redes (IPX)"
+    },
+    {
+        "port": "220",
+        "name": "imap3",
+        "descript": "IMAP versión 3"
+    },
+    {
+        "port": "245",
+        "name": "link",
+        "descript": "Servicio LINK / 3-DNS iQuery"
+    },
+    {
+        "port": "347",
+        "name": "fatserv",
+        "descript": "Servicio de administración de cintas y archivos FATMEN"
+    },
+    {
+        "port": "363",
+        "name": "rsvp_tunnel",
+        "descript": "Túnel RSVP"
+    },
+    {
+        "port": "369",
+        "name": "rpc2portmap",
+        "descript": "Portmapper del sistema de archivos Coda"
+    },
+    {
+        "port": "370",
+        "name": "codaauth2",
+        "descript": "Servicios de autenticación del sistema de archivos Coda"
+    },
+    {
+        "port": "372",
+        "name": "ulistproc",
+        "descript": "UNIX LISTSERV"
+    },
+    {
+        "port": "389",
+        "name": "ldap",
+        "descript": "LDAP Protocolo de acceso ligero a Bases de Datos"
+    },
+    {
+        "port": "427",
+        "name": "svrloc",
+        "descript": "Protocolo de ubicación de servicios (SLP)"
+    },
+    {
+        "port": "434",
+        "name": "mobileip-agent",
+        "descript": "Agente móvil del Protocolo Internet"
+    },
+    {
+        "port": "435",
+        "name": "mobilip-mn",
+        "descript": "Gestor móvil del Protocolo Internet"
+    },
+    {
+        "port": "443",
+        "name": "https",
+        "descript": "HTTPS/SSL usado para la transferencia segura de páginas web"
+    },
+    {
+        "port": "444",
+        "name": "snpp",
+        "descript": "Protocolo simple de Network Pagging"
+    },
+    {
+        "port": "445",
+        "name": "microsoft-ds",
+        "descript": "Microsoft-DS (Active Directory,\ncompartición en Windows, gusano Sasser, Agobot)\no también es usado por Microsoft-DS compartición de ficheros"
+    },
+    {
+        "port": "465",
+        "name": "smtps",
+        "descript": "SMTP Sobre SSL. Utilizado para el envío de correo electrónico (E-mail)"
+    },
+    {
+        "port": "500",
+        "name": "",
+        "descript": "IPSec ISAKMP, Autoridad de Seguridad Local"
+    },
+    {
+        "port": "512",
+        "name": "",
+        "descript": "exec"
+    },
+    {
+        "port": "513",
+        "name": "",
+        "descript": "Rlogin"
+    },
+    {
+        "port": "514",
+        "name": "",
+        "descript": "syslog usado para logs del sistema"
+    },
+    {
+        "port": "515",
+        "name": "",
+        "descript": "usado para la impresión en windows"
+    },
+    {
+        "port": "520",
+        "name": "rip",
+        "descript": "RIP Routing Information Protocol (Protocolo de Información de Enrutamiento)"
+    },
+    {
+        "port": "521",
+        "name": "ripng",
+        "descript": "RIP Routing Information Protocol IPv6 (Protocolo de Información de Enrutamiento Internet v6)2​"
+    },
+    {
+        "port": "587",
+        "name": "smtp",
+        "descript": "SMTP Sobre TLS"
+    },
+    {
+        "port": "591",
+        "name": "",
+        "descript": "FileMaker 6.0 (alternativa para HTTP, ver port 80)"
+    },
+    {
+        "port": "631",
+        "name": "",
+        "descript": "CUPS sistema de impresión de Unix"
+    },
+    {
+        "port": "666",
+        "name": "",
+        "descript": "identificación de Doom para jugar sobre TCP"
+    },
+    {
+        "port": "690",
+        "name": "",
+        "descript": "VATP (Velneo Application Transfer Protocol) Protocolo de comunicaciones de Velneo"
+    },
+    {
+        "port": "993",
+        "name": "imaps",
+        "descript": "IMAP4 sobre SSL (E-mail)"
+    },
+    {
+        "port": "995",
+        "name": "",
+        "descript": "POP3 sobre SSL (E-mail)"
+    },
+    {
+        "port": "1080",
+        "name": "",
+        "descript": "SOCKS Proxy"
+    },
+    {
+        "port": "1337",
+        "name": "",
+        "descript": "suele usarse en máquinas comprometidas o infectadas"
+    },
+    {
+        "port": "1352",
+        "name": "",
+        "descript": "IBM Lotus Notes/Domino RCP"
+    },
+    {
+        "port": "1433",
+        "name": "",
+        "descript": "Microsoft-SQL-Server"
+    },
+    {
+        "port": "1434",
+        "name": "",
+        "descript": "Microsoft-SQL-Monitor"
+    },
+    {
+        "port": "1494",
+        "name": "",
+        "descript": "Citrix MetaFrame Cliente ICA"
+    },
+    {
+        "port": "1512",
+        "name": "",
+        "descript": "WINS Windows Internet Naming Service"
+    },
+    {
+        "port": "1521",
+        "name": "",
+        "descript": "Oracle port de escucha por defecto"
+    },
+    {
+        "port": "1701",
+        "name": "",
+        "descript": "Enrutamiento y Acceso Remoto para VPN con L2TP."
+    },
+    {
+        "port": "1720",
+        "name": "",
+        "descript": "H.323"
+    },
+    {
+        "port": "1723",
+        "name": "",
+        "descript": "Enrutamiento y Acceso Remoto para VPN con PPTP."
+    },
+    {
+        "port": "1761",
+        "name": "",
+        "descript": "Novell Zenworks Remote Control utility"
+    },
+    {
+        "port": "1863",
+        "name": "",
+        "descript": "MSN Messenger"
+    },
+    {
+        "port": "1935",
+        "name": "",
+        "descript": "FMS Flash Media Server"
+    },
+    {
+        "port": "2049",
+        "name": "",
+        "descript": "NFS Archivos del sistema de red"
+    },
+    {
+        "port": "2082",
+        "name": "",
+        "descript": "cPanel port por defecto"
+    },
+    {
+        "port": "2083",
+        "name": "",
+        "descript": "CPanel port por defecto sobre SSL"
+    },
+    {
+        "port": "2086",
+        "name": "",
+        "descript": "Web Host Manager port por defecto"
+    },
+    {
+        "port": "2427",
+        "name": "",
+        "descript": "Cisco MGCP"
+    },
+    {
+        "port": "3030 and udp",
+        "name": "",
+        "descript": "NetPanzer"
+    },
+    {
+        "port": "3074",
+        "name": "",
+        "descript": "Xbox Live"
+    },
+    {
+        "port": "3074",
+        "name": "",
+        "descript": "Xbox Live"
+    },
+    {
+        "port": "3128",
+        "name": "",
+        "descript": "HTTP usado por web caches y por defecto en Squid cache"
+    },
+    {
+        "port": "3128",
+        "name": "",
+        "descript": "NDL-AAS"
+    },
+    {
+        "port": "3306",
+        "name": "",
+        "descript": "MySQL sistema de gestión de bases de datos"
+    },
+    {
+        "port": "3389",
+        "name": "",
+        "descript": "RDP (Remote Desktop Protocol) Terminal Server"
+    },
+    {
+        "port": "3396",
+        "name": "",
+        "descript": "Novell agente de impresión NDPS"
+    },
+    {
+        "port": "3690",
+        "name": "",
+        "descript": "Subversion (sistema de control de versiones)"
+    },
+    {
+        "port": "4443 and udp",
+        "name": "",
+        "descript": "AOL Instant Messenger (sistema de mensajería) 3​"
+    },
+    {
+        "port": "4662",
+        "name": "",
+        "descript": "eMule (aplicación de compartición de ficheros)"
+    },
+    {
+        "port": "4672",
+        "name": "",
+        "descript": "eMule (aplicación de compartición de ficheros)"
+    },
+    {
+        "port": "4899",
+        "name": "",
+        "descript": "RAdmin (Remote Administrator),\nherramienta de administración remota (normalmente troyanos)"
+    },
+    {
+        "port": "5000",
+        "name": "",
+        "descript": "Universal plug-and-play"
+    },
+    {
+        "port": "5001",
+        "name": "",
+        "descript": "Agente v6 Datadog4​"
+    },
+    {
+        "port": "5060",
+        "name": "",
+        "descript": "Session Initiation Protocol (SIP)"
+    },
+    {
+        "port": "5190",
+        "name": "",
+        "descript": "AOL y AOL Instant Messenger"
+    },
+    {
+        "port": "5222",
+        "name": "",
+        "descript": "Jabber/XMPP conexión de cliente"
+    },
+    {
+        "port": "5223",
+        "name": "",
+        "descript": "Jabber/XMPP port por defecto para conexiones de cliente SSL"
+    },
+    {
+        "port": "5269",
+        "name": "",
+        "descript": "Jabber/XMPP conexión de servidor"
+    },
+    {
+        "port": "5432",
+        "name": "",
+        "descript": "PostgreSQL sistema de gestión de bases de datos"
+    },
+    {
+        "port": "5517",
+        "name": "",
+        "descript": "Setiqueue proyecto SETI@Home"
+    },
+    {
+        "port": "5631",
+        "name": "",
+        "descript": "PC-Anywhere protocolo de escritorio remoto"
+    },
+    {
+        "port": "5632",
+        "name": "",
+        "descript": "PC-Anywhere protocolo de escritorio remoto"
+    },
+    {
+        "port": "5400",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (usado sobre HTTP)"
+    },
+    {
+        "port": "5500",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (usado sobre HTTP)"
+    },
+    {
+        "port": "5600",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (usado sobre HTTP)"
+    },
+    {
+        "port": "5700",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (usado sobre HTTP)"
+    },
+    {
+        "port": "5800",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (usado sobre HTTP)"
+    },
+    {
+        "port": "5900",
+        "name": "",
+        "descript": "VNC protocolo de escritorio remoto (conexión normal)"
+    },
+    {
+        "port": "6000",
+        "name": "",
+        "descript": "X11 usado para X-windows"
+    },
+    {
+        "port": "6112",
+        "name": "",
+        "descript": "Blizzard"
+    },
+    {
+        "port": "6129",
+        "name": "",
+        "descript": "Dameware Software conexión remota"
+    },
+    {
+        "port": "6346",
+        "name": "",
+        "descript": "Gnutella compartición de ficheros (Limewire, etc.)"
+    },
+    {
+        "port": "6347",
+        "name": "",
+        "descript": "Gnutella"
+    },
+    {
+        "port": "6348",
+        "name": "",
+        "descript": "Gnutella"
+    },
+    {
+        "port": "6349",
+        "name": "",
+        "descript": "Gnutella"
+    },
+    {
+        "port": "6350",
+        "name": "",
+        "descript": "Gnutella"
+    },
+    {
+        "port": "6355",
+        "name": "",
+        "descript": "Gnutella"
+    },
+    {
+        "port": "6667",
+        "name": "",
+        "descript": "IRC IRCU Internet Relay Chat"
+    },
+    {
+        "port": "6881",
+        "name": "",
+        "descript": "BitTorrent port por defecto"
+    },
+    {
+        "port": "6969",
+        "name": "",
+        "descript": "BitTorrent port de tracker"
+    },
+    {
+        "port": "7100",
+        "name": "",
+        "descript": "Servidor de Fuentes X11"
+    },
+    {
+        "port": "7100",
+        "name": "",
+        "descript": "Servidor de Fuentes X11"
+    },
+    {
+        "port": "8000",
+        "name": "",
+        "descript": "iRDMI por lo general, usado erróneamente en sustitución de 8080.\nTambién utilizado en el servidor de streaming ShoutCast."
+    },
+    {
+        "port": "8080",
+        "name": "",
+        "descript": "HTTP HTTP-ALT ver port 80. Tomcat lo usa como port por defecto."
+    },
+    {
+        "port": "8118",
+        "name": "",
+        "descript": "privoxy"
+    },
+    {
+        "port": "9009",
+        "name": "",
+        "descript": "Pichat peer-to-peer chat server"
+    },
+    {
+        "port": "9898",
+        "name": "",
+        "descript": "Gusano Dabber (troyano/virus)"
+    },
+    {
+        "port": "10000",
+        "name": "",
+        "descript": "Webmin (Administración remota web)"
+    },
+    {
+        "port": "19226",
+        "name": "",
+        "descript": "Panda Security port de comunicaciones de Panda Agent."
+    },
+    {
+        "port": "12345",
+        "name": "",
+        "descript": "NetBus en:NetBus (troyano/virus)"
+    },
+    {
+        "port": "25565",
+        "name": "",
+        "descript": "Minecraft port por defecto usado por servidores del juego."
+    },
+    {
+        "port": "31337",
+        "name": "",
+        "descript": "Back Orifice herramienta de administración remota (por lo general troyanos)"
+    },
+    {
+        "port": "41121",
+        "name": "tentacle",
+        "descript": "Protocolo de transferencia utilizado por Pandora FMS.5​"
+    },
+    {
+        "port": "42000",
+        "name": "",
+        "descript": "Utilizado por Percona Monitoring Management para recoger métricas generales.6​"
+    },
+    {
+        "port": "42001",
+        "name": "",
+        "descript": "Utilizado por Percona Monitoring Management para recabar datos de desempeño.6​"
+    },
+    {
+        "port": "42002",
+        "name": "",
+        "descript": "Utilizado por Percona Monitoring Management para recabar métricas de MySQL.6​"
+    },
+    {
+        "port": "42003",
+        "name": "",
+        "descript": "Utilizado por Percona Monitoring Management para recabar métricas de MongoDB.6​"
+    },
+    {
+        "port": "42004",
+        "name": "",
+        "descript": "Utilizado por Percona Monitoring Management para recabar métricas de ProxySQL.6​"
+    },
+    {
+        "port": "45003",
+        "name": "",
+        "descript": "Calivent herramienta de administración remota SSH con análisis de paquetes.\nsmb  137-19,445"
+    }
+]
