@@ -54,6 +54,98 @@ def findValueDict(value, key, file):
     return False
 
 
+def dnsReading(binaryString):
+    dnsData = binaryString
+    dns_header = {
+        "ID": None,
+        "QR": None,
+        "OPCODE": None,
+        "AA": None,
+        "TC": None,
+        "RD": None,
+        "RA": None,
+        "Z": None,
+        "RCODE": None,
+        "QDCOUNT": None,
+        "ANCOUNT": None,
+        "NSCOUNT": None,
+        "ARCOUNT": None
+    }
+    dns_question = {
+        "QNAME": None,
+        "QTYPE": None,
+        "QCLASS": None
+    }
+    dns_answer = {
+        "NAME": None,
+        "TYPE": None,
+        "CLASS": None,
+        "TTL": None,
+        "RDLENGTH": None,
+        "RDATA": None
+    }
+
+    # DNS HEADER SECTION
+    dns_header['ID'] = hex(int(binaryString[0:16], 2)).upper()[2:]
+    dns_header['QR'] = binaryString[16:17]
+    dns_header['OPCODE'] = int(binaryString[17:21], 2)
+    dns_header['AA'] = binaryString[21:22]
+    dns_header['TC'] = binaryString[22:23]
+    dns_header['RD'] = binaryString[23:24]
+    dns_header['RA'] = binaryString[24:25]
+    dns_header['Z'] = binaryString[25:28]
+    dns_header['RCODE'] = int(binaryString[28:32], 2)
+    dns_header['QDCOUNT'] = int(binaryString[32:48], 2)
+    dns_header['ANCOUNT'] = int(binaryString[48:64], 2)
+    dns_header['NSCOUNT'] = int(binaryString[64:80], 2)
+    dns_header['ARCOUNT'] = int(binaryString[80:96], 2)
+
+    sitename, a = ascii_conv(binaryString[96:])
+    dns_question['QNAME'] = sitename
+    dns_question['QTYPE'] = int(binaryString[96+a:112+a], 2)
+    dns_question['QCLASS'] = int(binaryString[112+a:128+a], 2)
+
+    b = a
+    sitename, a = ascii_conv(binaryString[128+b:144+b])
+    dns_answer['QNAME'] = sitename
+    dns_answer['TYPE'] = int(binaryString[144+a+b:160+a+b], 2)
+    dns_answer['CLASS'] = int(binaryString[160+a+b:172+a+b], 2)
+    dns_answer['TTL'] = int(binaryString[172+a+b:204+a+b], 2)
+    dns_answer['RDLENGTH'] = hex(
+        int(binaryString[204+a+b:220+a+b], 2)).upper()[2:]
+
+    if(dns_answer['CLASS'] == 1):
+        dns_answer['RDATA'] = int(binaryString[220+a+b:252+a+b], 2)
+    if(dns_answer['CLASS'] == 5):
+        dns_answer['RDATA'] = dns_question['QNAME']
+    if(dns_answer['CLASS'] == 13):
+        dns_answer['RDATA'] = int(binaryString[220+a+b:252+a+b], 2)
+    if(dns_answer['CLASS'] == 22 or dns_answer['CLASS'] == 13):
+        dns_answer['RDATA'] = int(binaryString[220+a+b:252+a+b], 2)
+
+    print("HEADER\n{}".format(json.dumps(dns_header, indent=2)))
+    print("QUESTION\n{}".format(json.dumps(dns_question, indent=2)))
+    print("ANSWER\n{}".format(json.dumps(dns_answer, indent=2)))
+
+
+def ascii_conv(binaryString):
+    start = 0
+    end = 8
+    top = len(binaryString)
+    word = " "
+
+    while(binaryString[start:end] != "00000000" and end < top):
+        letter = int(binaryString[start:end], 2)
+        try:
+            word += binascii.unhexlify('%x' % letter).decode("utf-8")
+        except:
+            pass
+        start += 8
+        end += 8
+
+    return(word, end)
+
+
 def process_data(raw_data):
     hexString = str(binascii.hexlify(
         bytes(raw_data[0])))[2:-1]
@@ -175,7 +267,7 @@ def process_data(raw_data):
                                             [icmpCode]['Message']))
                 print("\tChecksum: {}".format(icmpChecksum))
 
-            if(protocol == 6):
+            if(protocol == 6 or protocol == 17):
                 originPort = int(ip[160:176], 2)
                 originPortData = findValueDict(
                     originPort, 'port', "tcp_ports.json")
@@ -202,6 +294,7 @@ def process_data(raw_data):
                 windowSize = int(ip[233:248], 2)
                 checksumTCP = hex(int(ip[248:264], 2)).upper()[2:]
                 urgentPointer = int(ip[264:280], 2)
+                data = ip[280:]
 
                 if(originPortData != False):
                     print(
@@ -211,19 +304,32 @@ def process_data(raw_data):
 
                 if(destinyPortData != False):
                     print(
-                        "\tPuerto de origen: {} [{} - {}]".format(destinyPortData['port'], destinyPortData['name'], destinyPortData['descript']))
+                        "\tPuerto de destino: {} [{} - {}]".format(destinyPortData['port'], destinyPortData['name'], destinyPortData['descript']))
                 else:
                     print("\tPuerto de destino: {}".format(destinyPort))
 
-                print("\tNum. de secuencia: {}".format(sequenceNumber))
-                print("\tNum. de acuse de recibo: {}".format(acknowledgeNumber))
+                if(protocol == 6):
+                    print("\tNum. de secuencia: {}".format(sequenceNumber))
+                    print("\tNum. de acuse de recibo: {}".format(
+                        acknowledgeNumber))
+                    print("\tReservado: {}".format(reserved))
+                    print("\tB A N D E R A S")
+                    print(
+                        "\t\tNS: {}\n\t\tCWR: {}\n\t\tECE: {}\n\t\tURG: {}\n\t\tACK: {}\n\t\tPSH: {}\n\t\tRST: {}\n\t\tSYN: {}\n\t\tFIN: {}".format(ns, cwr, ece, urg, ack, psh, rst, syn, fin))
+                    print("\tVentana: {}".format(windowSize))
+                    print("\tPuntero urgente: {}".format(urgentPointer))
+
+                if(protocol == 17):
+                    headSize = hex(int(ip[208:224], 2)).upper()[2:]
+                    checksumTCP = hex(int(ip[224:240], 2)).upper()[2:]
+                    data = ip[240:]
+
                 print("\tLongitud de cabecera: {}".format(headSize))
-                print("\tB A N D E R A S")
-                print(
-                    "\t\tNS: {}\n\t\tCWR: {}\n\t\tECE: {}\n\t\tURG: {}\n\t\tACK: {}\n\t\tPSH: {}\n\t\tRST: {}\n\t\tSYN: {}\n\t\tFIN: {}".format(ns, cwr, ece, urg, ack, psh, rst, syn, fin))
-                print("\tVentana: {}".format(windowSize))
                 print("\tChecksum: {}".format(checksumTCP))
-                print("\tPuntero urgente: {}".format(urgentPointer))
+
+                if(originPort == 53):
+                    print("\tD N S")
+                    dnsReading(data)
 
             print("Suma de control de cabecera: ", controlHeader)
 
